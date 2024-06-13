@@ -15,6 +15,6 @@ public class UsedGoods {
 	private LocalDateTime updatedAt;
 	
 	public int getId() {
-		return Id;
+		return id;
 	}
 }
