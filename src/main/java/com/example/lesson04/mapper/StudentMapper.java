@@ -8,4 +8,6 @@ import com.example.lesson04.domain.Student;
 public interface StudentMapper {
 
 	public int insertStudent(Student student);
+	
+	public Student selectStudentById(int id);
 }
