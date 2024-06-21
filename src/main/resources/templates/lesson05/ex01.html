@@ -5,6 +5,53 @@
     <title>타임리프 예제1</title>
 </head>
 <body>
-
+	<h1>1. 변수</h1>
+	<div th:with="number=100">
+		<!--변수 정의내 scope에서만 사용 가능  --> 
+		<div th:text="${number}"></div>
+		<div>[[${number}]]</div>
+	</div>
+	
+	<!-- th:block 렌더링 되지 않는 타임리프 태그 -->
+	<th:block th:with="number1=100, number2=250">
+		[[${number1}]], [[${number2}]]
+		<div th:text="${number1}"></div>
+		<div th:text="${number2}"></div>
+		<div th:text="${number1 + number2}"></div>
+			
+		<h4 th:text="'결과:' + ${number1 + number2}"></h4>
+		<h4>결과: [[${number1 + number2}]]</h4>
+		<h4 th:text="|결과:${number1 + number2}|"></h4>
+	</th:block>
+	
+	<h1>2. 태그 나타내기</h1>
+	<!-- th:text는 escape 처리가 되어 있다.  -->
+	<div th:text="'<b>진한 글자</b>'"></div>
+	
+	<!-- th:utext는 태그를 그대로 해석해줌 -->
+	<div th:utext="'<b>진한 글자</b>'"></div>
+	
+	<h1>3. 조건문 - else if, else 개념이 없다.</h1>
+	<th:block th:with="age=25">
+		<div th:if="${age == 25}">나이는 25세이다.</div>
+		<div th:if="${age == 30}">나이는 30세이다.</div>
+		<div th:if="${age != 20}">나이가 20세가 아니다.</div>
+		
+		<!-- unless: if문 반대 - else가 없으니 if문의 조건을 똑같이 쓰고  unless라 하면 else같이 된다. -->
+		<h3 th:if="${age >= 20}">성인이다.</h3>	
+		<h3 th:unless="${age >= 20}">미성년자이다.</h3>	
+		
+		<h3 th:unless="${age == 20}">unless는 조건이 거짓일 때 참이다.</h3>
+	</th:block>
+		
+		<h1>4. switch, case - 일치 되는 케이스 수행</h1>
+		<th:block th:with="season=여름">
+			<div th:switch="${season}">
+				<h3 th:case="'봄'">봄</h3>
+				<h3 th:case="'여름'">여름</h3>
+				<h3 th:case="'가을'">가을</h3>
+				<h3 th:case="*">겨울</h3>
+			</div>
+		</th:block>		
 </body>
 </html>

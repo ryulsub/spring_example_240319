@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>타임리프 예제2</title>
+</head>
+<body>
+	<h1>반복문(each)</h1>
+	<h2>1. 숫자 반복문</h2>
+	<!--  0 ~ 5 => 6번 -->
+	<div th:each="value : ${#numbers.sequence(0, 5)}">
+		[[${value}]]		
+	</div>
+	<hr>
+	
+	<!-- 16 ~ 20 => 5번, status 추가 -->
+	<div th:each="value, status : ${#numbers.sequence(16, 20)}">
+		<span th:text="${value}"></span>
+		status: <span th:text="${status}"></span>	
+		count: <span th:text="${status.count}"></span>
+		first: <span th:text="${status.first}"></span>
+		last: <span th:text="${status.last}"></span>
+	</div>
+	
+	<h2>2. List 반복문 - String</h2>
+	<div th:each="fruit, status : ${fruits}">
+		<span th:text="${fruit}"></span>
+		<span th:text="|count: ${status.count}|"></span>
+		<span th:text="|index: ${status.index}|"></span>
+	</div>
+	
+	[[${users]]
+	<h2>3. List 반복문 - Map</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>나이</th>
+				<th>취미</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user, status : ${users}">
+				<td th:text="${status.count}">번호</td>
+				<td th:text="${user.name}">이름</td>
+				<td th:text="${user.age}"></td>
+				<td th:text="${user.hobby}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
