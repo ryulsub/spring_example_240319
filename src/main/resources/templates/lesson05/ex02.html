@@ -7,16 +7,16 @@
 <body>
 	<h1>반복문(each)</h1>
 	<h2>1. 숫자 반복문</h2>
-	<!--  0 ~ 5 => 6번 -->
+	<!-- 0 ~ 5 => 6번 -->
 	<div th:each="value : ${#numbers.sequence(0, 5)}">
-		[[${value}]]		
+		[[${value}]]
 	</div>
 	<hr>
 	
 	<!-- 16 ~ 20 => 5번, status 추가 -->
 	<div th:each="value, status : ${#numbers.sequence(16, 20)}">
 		<span th:text="${value}"></span>
-		status: <span th:text="${status}"></span>	
+		status: <span th:text="${status}"></span>
 		count: <span th:text="${status.count}"></span>
 		first: <span th:text="${status.first}"></span>
 		last: <span th:text="${status.last}"></span>
@@ -29,7 +29,7 @@
 		<span th:text="|index: ${status.index}|"></span>
 	</div>
 	
-	[[${users]]
+	[[${users}]]
 	<h2>3. List 반복문 - Map</h2>
 	<table border="1">
 		<thead>

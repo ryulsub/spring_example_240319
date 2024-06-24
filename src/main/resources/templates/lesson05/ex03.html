@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>타임리프 예제3</title>
+</head>
+<body>
+	<h1>1. 날짜 객체</h1>
+	<div th:text="'Date:' + ${date}"></div>
+	<div th:text="'LocalDate:' + ${localDate}"></div>
+	<div th:text="|localDateTime: ${localDateTime}|"></div>
+	<div th:text="|zonedDateTime: ${zonedDateTime}|"></div>
+	
+	<h1>2. 날짜 포맷</h1>
+	Date: <span th:text="${#dates.format(date, 'yyyy년 MM월 dd일 a HH시 mm분 ss초')}"></span><br>
+	LocalDate: <span th:text="${#temporals.format(localDate, 'yyyy년 MM월 dd일 a HH시 mm분 ss초')}"></span><br>
+	LocalDateTime: <span th:text="${#temporals.format(localDateTime, 'yyyy/MM/dd a HH:mm:ss')}"></span><br>
+	
+	<!-- 변수에 저장 -->
+	<th:block th:with="value=${#temporals.format(zonedDateTime, 'yyyy-MM-dd a HH:mm:ss')}">
+		ZonedDateTime: <span th:text="${value}"></span>
+	</th:block>
+	
+	<h1>3. String 함수</h1>
+	<th:block th:with="str1='No pain. No gain.'">
+		<h3>1. 길이 구하기</h3>
+		<span th:text="${#strings.length(str1)}"></span>
+		
+		<h3>2. 특정 문자열이 포함되었는지 확인</h3>
+		No가 존재하는가? <span th:text="${#strings.contains(str1, 'No')}"></span><br>
+		no가 존재하는가? <span th:text="${#strings.contains(str1, 'no')}"></span><br>
+		
+		<div th:if="${#strings.containsIgnoreCase(str1, 'no')}">
+			문장에 no라는 문자열 존재(대소문자 구별 안함)
+		</div>
+		
+		<h3>3. 특정 문자열로 시작하는지 확인</h3>
+		No로 시작하는가? <span th:text="${#strings.startsWith(str1, 'No')}"></span>
+		
+		<h3>4. 특정 문자열로 끝나는지 확인</h3>
+		.으로 끝나는가? <span th:text="${#strings.endsWith(str1, '.')}"></span>
+		
+		<h3>5. 문자열 치환</h3>
+		<th:block th:with="str2='I love chicken.'">
+			<span th:text="${str2}"></span><br>
+			<span th:text="${#strings.replace(str2, 'chicken', 'bread')}"></span>
+			
+			<h3>6. 구분자로 잘라서 배열 만들기</h3>
+			<span th:text="${#strings.arraySplit(str1, '.')[0]}"></span><br>
+			<span th:text="${#strings.arraySplit(str1, '.')[1]}"></span>
+			
+			<h3>7. 특정 인덱스 구간 문자열 추출</h3>
+			<!-- str2에서 love를 추출 -->
+			<span th:text="${#strings.substring(str2, 2, 6)}"></span>
+			
+			<h3>8. 모두 소문자로 변경</h3>
+			<span th:text="${#strings.toLowerCase(str2)}"></span>
+			
+			<h3>9. 모두 대문자로 변경</h3>
+			<span th:text="${#strings.toUpperCase(str2)}"></span>
+			
+			<h3>10. 앞뒤 공백 제거</h3>
+			<th:block th:with="str3='		h e 	ll o 		'">
+				<pre th:text="${str3}"></pre>
+				<pre th:text="${#strings.trim(str3)}"></pre>
+			</th:block>
+		</th:block>
+	</th:block>
+</body>
+</html>
