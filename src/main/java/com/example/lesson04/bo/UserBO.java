@@ -25,7 +25,15 @@ public class UserBO {
 	// input : X
 	// output : User
 	public User getLatestUser() {
-		return userMapper.selecetLatestUser()
-;	}
+		return userMapper.selecetLatestUser();
+	}
 	
+	
+	
+	
+	// input: name
+	// output: boolean
+	public boolean isDuplicationByName(String name) {
+		return userMapper.isDuplicationByName(name);
+	}
 }
